@@ -105,7 +105,7 @@ export function findNearestStation(lat: number, lon: number): Station & { distan
     let nearestStation: Station | null = null;
     let minDistance = Infinity;
 
-    const stations = stationsData as Record<string, Station>;
+    const stations = stationsData as unknown as Record<string, Omit<Station, 'id'>>;
 
     for (const [id, station] of Object.entries(stations)) {
         // Basic filter: 'elems' having '1' tells capability.
