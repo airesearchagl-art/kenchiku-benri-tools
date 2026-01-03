@@ -19,11 +19,11 @@ export default function Home() {
       active: true,
     },
     {
-      id: 'coming-soon-1',
+      id: 'legal-floor-area',
       title: '法定床面積計算',
-      description: 'Coming Soon...',
-      href: '#',
-      active: false,
+      description: 'フロアごとの求積・面積表作成ツール。',
+      href: '/tools/legal-floor-area',
+      active: true,
     },
     {
       id: 'coming-soon-2',
@@ -31,6 +31,19 @@ export default function Home() {
       description: 'Coming Soon...',
       href: '#',
       active: false,
+    },
+    {
+      id: 'zoning-info',
+      title: '用途地域検索',
+      description: '住所から用途地域・建ぺい率・容積率を検索します。(要APIキー)',
+      href: '/tools/zoning-info',
+      active: true,
+    },
+    {
+      title: 'パッシブデザイン診断',
+      description: '気象データに基づき、風と光を活かす最適な設計方針を提案。',
+      href: '/tools/passive-design',
+      active: true,
     },
   ];
 
