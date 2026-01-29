@@ -305,7 +305,7 @@ export function calculateGlassStrength(input: GlassCalculationInput): GlassStren
     if (supportType === 'four_edge') {
         const ar = Math.max(width, height) / Math.min(width, height);
         const shortEdge = Math.min(width, height);
-        const q = w_area_val; // N/mm²
+        const q = (designLoad / 1000) / height; // N/mm²
 
         // 再計算（変数のスコープ整理のため）
         let tableBeta = 0.2874;
