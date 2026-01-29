@@ -40,9 +40,17 @@ export default function Home() {
       active: true,
     },
     {
+      id: 'passive-design',
       title: 'パッシブデザイン診断',
       description: '気象データに基づき、風と光を活かす最適な設計方針を提案。',
       href: '/tools/passive-design',
+      active: true,
+    },
+    {
+      id: 'handrail-strength',
+      title: '手すり強度検討',
+      description: 'JIS A 4709に基づく手すりの強度計算。支柱・笠木の許容応力度・たわみ検討。',
+      href: '/tools/handrail-strength',
       active: true,
     },
   ];

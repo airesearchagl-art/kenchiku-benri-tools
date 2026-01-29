@@ -39,6 +39,20 @@ export default function ToolsPage() {
             active: true,
         },
         {
+            id: 'plateau-shadow',
+            title: '3D都市モデルシミュレーター',
+            description: 'Plateauの3Dモデルで周辺建物や日影を表示。冬至の影やMapbox軽量表示にも対応。',
+            href: '/tools/plateau-shadow',
+            active: true,
+        },
+        {
+            id: 'handrail-strength',
+            title: '手すり強度検討',
+            description: 'JIS A 4709規格に基づく手すりの支柱・笠木の強度計算ツール。',
+            href: '/tools/handrail-strength',
+            active: true,
+        },
+        {
             id: 'coming-soon-2',
             title: '採光計算',
             description: 'Coming Soon...',

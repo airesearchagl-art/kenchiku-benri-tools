@@ -65,6 +65,16 @@ export default function AboutPage() {
             href: '/tools/plateau-shadow',
             color: 'indigo',
         },
+        {
+            id: 'handrail-strength',
+            title: '手すり強度検討',
+            icon: Building2, // 暫定で同じアイコン、または lucide-react から別のものをインポートして使う
+            description: 'JIS A 4709 規格に基づき、手すり支柱・笠木の強度およびたわみを計算します。群集荷重等の条件設定も可能。',
+            features: ['支柱強度計算（片持ち梁）', '笠木強度計算（単純梁）', '日常荷重下でのたわみ判定', 'PDFレポート出力'],
+            tech: ['JIS規格準拠計算ロジック', 'html2canvas + jsPDF', 'React Hook Form'],
+            href: '/tools/handrail-strength',
+            color: 'green', // 他の色と被るが、安全等のイメージで緑系またはオレンジ等
+        },
     ];
 
     const colorClasses: Record<string, { border: string; bg: string; icon: string; button: string }> = {
