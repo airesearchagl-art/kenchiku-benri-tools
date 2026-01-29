@@ -3,8 +3,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
-import { Select } from '@/components/ui/Select';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/Select';
 import { Button } from '@/components/ui/Button';
+import { Label } from '@/components/ui/Label';
 import { calculateFixtures, calculateCapacityRange, CalculationResult } from '@/utils/sanitaryCalculator';
 import { BuildingUsage, ServiceLevel, BUILDING_USAGE_LABELS, FixtureType } from '@/utils/sanitaryStandards';
 import { FixtureGraph } from '@/components/FixtureGraph';
@@ -121,20 +122,38 @@ export default function SanitaryCalculatorPage() {
                                 <CardTitle>1. 算定条件</CardTitle>
                             </CardHeader>
                             <CardContent className="space-y-6 pt-6">
-                                <Select
-                                    id="usage"
-                                    label="建物用途"
-                                    value={usage}
-                                    onChange={(e) => setUsage(e.target.value as BuildingUsage)}
-                                    options={usageOptions}
-                                />
-                                <Select
-                                    id="serviceLevel"
-                                    label="サービスレベル"
-                                    value={serviceLevel}
-                                    onChange={(e) => setServiceLevel(Number(e.target.value) as ServiceLevel)}
-                                    options={serviceLevelOptions}
-                                />
+                                <div className="space-y-2">
+                                    <Label htmlFor="usage">建物用途</Label>
+                                    <Select value={usage} onValueChange={(val) => setUsage(val as BuildingUsage)}>
+                                        <SelectTrigger id="usage">
+                                            <SelectValue placeholder="選択してください" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {usageOptions.map(opt => (
+                                                <SelectItem key={opt.value} value={opt.value}>
+                                                    {opt.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label htmlFor="serviceLevel">サービスレベル</Label>
+                                    <Select value={String(serviceLevel)} onValueChange={(val) => setServiceLevel(Number(val) as ServiceLevel)}>
+                                        <SelectTrigger id="serviceLevel">
+                                            <SelectValue placeholder="選択してください" />
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            {serviceLevelOptions.map(opt => (
+                                                <SelectItem key={opt.value} value={opt.value}>
+                                                    {opt.label}
+                                                </SelectItem>
+                                            ))}
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+
                                 <div className="p-3 rounded text-xs bg-blue-50 text-blue-700">
                                     Level 1: 待ち時間が極めて少ない<br />
                                     Level 2: 一般的な許容範囲<br />
