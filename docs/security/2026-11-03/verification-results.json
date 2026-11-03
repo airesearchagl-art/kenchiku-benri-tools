@@ -1,5 +1,7 @@
 {
   "date": "2026-11-03",
+  "validationScope": "Historical validation of aa75ccf606a81871549482b78b748cef0bbd26ad before the Cesium compiler.define correction",
+  "followupEvidence": "review-followup.json",
   "baselineMainSha": "a175e36cae0d23bb402ff868de4742423c8e385a",
   "role": "implementation; not independent review",
   "environment": {
