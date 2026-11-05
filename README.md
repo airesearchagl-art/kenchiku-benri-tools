@@ -2,6 +2,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+Use Node.js 22.23.4 or newer in the 22.x line, or Node.js 24.22.1 or newer.
+The security update was validated with Node.js 24.22.1. Install the locked
+dependencies with `npm ci` before running the application.
+
+See [the November 2026 dependency security update](docs/DEPENDENCY_SECURITY_2026-11-03.md)
+for validation results, remaining development-only findings, and local checks.
+
 First, run the development server:
 
 ```bash

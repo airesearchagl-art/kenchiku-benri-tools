@@ -1,0 +1,159 @@
+{
+  "date": "2026-11-03",
+  "validationScope": "Historical validation of aa75ccf606a81871549482b78b748cef0bbd26ad before the Cesium compiler.define correction",
+  "followupEvidence": "review-followup.json",
+  "baselineMainSha": "a175e36cae0d23bb402ff868de4742423c8e385a",
+  "role": "implementation; not independent review",
+  "environment": {
+    "node": "24.22.1",
+    "npm": "11.19.1",
+    "os": "Windows x64",
+    "browser": "156.0.4314.58",
+    "host": "127.0.0.1:3102",
+    "externalNetwork": "Blocked or synthetic browser fixtures; no real API keys or paid APIs"
+  },
+  "checks": [
+    {
+      "command": "npm ci",
+      "beforeExit": 0,
+      "afterExit": 0
+    },
+    {
+      "command": "npm run lint",
+      "beforeExit": 1,
+      "afterExit": 1,
+      "before": {
+        "errors": 27,
+        "warnings": 38
+      },
+      "after": {
+        "errors": 30,
+        "warnings": 38
+      },
+      "newDiagnostics": [
+        {
+          "file": "src/app/tools/handrail-strength/page.tsx",
+          "lines": [
+            195,
+            208
+          ],
+          "rule": "react-hooks/set-state-in-effect"
+        },
+        {
+          "file": "src/app/tools/zoning-info/page.tsx",
+          "lines": [
+            28
+          ],
+          "rule": "react-hooks/set-state-in-effect"
+        }
+      ]
+    },
+    {
+      "command": "tsc --noEmit --incremental false",
+      "beforeExit": 0,
+      "afterExit": 0
+    },
+    {
+      "command": "npm run build",
+      "beforeExit": 0,
+      "afterExit": 0
+    },
+    {
+      "command": "npm ls --all",
+      "beforeExit": null,
+      "afterExit": 0
+    },
+    {
+      "command": "npm audit --omit=dev",
+      "beforeExit": 1,
+      "afterExit": 0
+    },
+    {
+      "command": "npm audit",
+      "beforeExit": 1,
+      "afterExit": 1
+    }
+  ],
+  "browserInitial": [
+    {
+      "route": "/",
+      "status": 200,
+      "heading": "Architectural Tools",
+      "errors": []
+    },
+    {
+      "route": "/tools/zoning-info",
+      "status": 200,
+      "heading": "用途地域・都市計画検索",
+      "errors": []
+    },
+    {
+      "route": "/tools/rainwater-drainage",
+      "status": 200,
+      "heading": "雨水排水検討ツール",
+      "errors": []
+    },
+    {
+      "route": "/tools/passive-design",
+      "status": 200,
+      "heading": "パッシブデザイン診断ツール",
+      "errors": []
+    },
+    {
+      "route": "/tools/handrail-strength",
+      "status": 200,
+      "heading": "手すり強度検討ツール",
+      "errors": []
+    },
+    {
+      "route": "/api/zoning/proxy",
+      "status": 400,
+      "body": {
+        "error": "API Key is required."
+      }
+    },
+    {
+      "route": "/api/rainwater/rainfall",
+      "status": 400,
+      "body": {
+        "error": "Missing prec_no or station_name"
+      }
+    }
+  ],
+  "browserFlows": [
+    {
+      "flow": "zoning without API key",
+      "status": "partial",
+      "boundary": "Initial page and mocked geocode request verified in prior runs. Expected no-key notice did not appear: existing source sets debugInfo for result state but renders it only for error state. No additional zoning retry; actual protected tiles not tested."
+    },
+    {
+      "flow": "rainwater",
+      "status": "pass",
+      "boundary": "mock geocode -> local nearest-station data -> mocked rainfall API -> intensity/area -> print handler"
+    },
+    {
+      "flow": "passive design",
+      "status": "pass",
+      "detail": "Synthetic geocode/weather -> summer S/winter N -> chart/map placeholder tiles -> print handler. No real external API calls."
+    },
+    {
+      "flow": "handrail PDF",
+      "status": "pass",
+      "detail": "Default synthetic inputs -> save -> window.print handler -> Chromium PDF bytes; native print dialog and pagination not verified.",
+      "bytes": 330912
+    }
+  ],
+  "jsPdfSmoke": "jsPDF 4.2.1 generated 3188 PDF bytes",
+  "limitations": [
+    "No authenticated zoning tile check, live geocoding/weather/upstream check or live Cesium 3D check",
+    "No native print-dialog or visual PDF pagination acceptance",
+    "Zoning no-key explanatory notice remains unrendered in the existing result-state code",
+    "No automated test or typecheck script exists; direct tsc was run",
+    "No independent review, formal approval, readiness, merge or production deployment performed"
+  ],
+  "harnessNotes": [
+    "Initial text-input selector was corrected because the rendered input omits the type attribute.",
+    "Passive report title is print-only; final check asserts the visible export control, seasonal results and map tiles instead."
+  ],
+  "serverWarning": "next start warns about output:standalone; the existing npm start command was used for local smoke only."
+}

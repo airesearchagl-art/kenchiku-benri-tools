@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useSyncExternalStore } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
@@ -9,26 +9,31 @@ import { latLonToTile, isPointInMultiPolygon } from '@/utils/geoUtils';
 
 type ViewState = 'input' | 'searching' | 'result' | 'error';
 
+const subscribeToInitialKey = () => () => undefined;
+const getServerKey = () => '';
+
 export default function ZoningInfoPage() {
     // Inputs
     const [address, setAddress] = useState('');
-    const [apiKey, setApiKey] = useState('');
-    const [savedKey, setSavedKey] = useState(false);
+    // Restore once per mount; later storage changes must not overwrite edits.
+    const [getInitialKey] = useState(() => {
+        let initialKey: string | undefined;
+        return () => {
+            initialKey ??= localStorage.getItem('mlit_api_key') ?? '';
+            return initialKey;
+        };
+    });
+    const initialKey = useSyncExternalStore(subscribeToInitialKey, getInitialKey, getServerKey);
+    const [editedKey, setApiKey] = useState<string | null>(null);
+    const [savedKeyOverride, setSavedKey] = useState<boolean | null>(null);
+    const apiKey = editedKey ?? initialKey;
+    const savedKey = savedKeyOverride ?? Boolean(initialKey);
 
     // Results
     const [viewState, setViewState] = useState<ViewState>('input');
     const [results, setResults] = useState<{ [key: string]: any }>({});
     const [coords, setCoords] = useState<{ lat: number, lon: number } | null>(null);
     const [debugInfo, setDebugInfo] = useState<string>('');
-
-    // Load API Key from localStorage
-    useEffect(() => {
-        const key = localStorage.getItem('mlit_api_key');
-        if (key) {
-            setApiKey(key);
-            setSavedKey(true);
-        }
-    }, []);
 
     const saveApiKey = () => {
         if (!apiKey) return;

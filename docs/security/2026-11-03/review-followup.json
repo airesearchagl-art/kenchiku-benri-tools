@@ -1,0 +1,432 @@
+{
+  "date": "2026-11-03",
+  "role": "implementation; not independent review or risk acceptance",
+  "reviewedHead": "aa75ccf606a81871549482b78b748cef0bbd26ad",
+  "baselineMain": "a175e36cae0d23bb402ff868de4742423c8e385a",
+  "scope": "next.config.ts only for runtime code; dependency manifest, lockfile and application source unchanged",
+  "testedConfigSha256": "4271f674bd1747a41226d0bf98f97edebf251ac45ab78fc7ee6336e003feea93",
+  "node": "24.22.1",
+  "npm": "11.19.1",
+  "checks": [
+    {
+      "command": "npm ci",
+      "exit": 0
+    },
+    {
+      "command": "npm run lint",
+      "exit": 1,
+      "baseline": {
+        "errors": 27,
+        "warnings": 38
+      },
+      "reviewedHead": {
+        "errors": 30,
+        "warnings": 38
+      },
+      "current": {
+        "errors": 29,
+        "warnings": 36
+      },
+      "note": "Removing obsolete config removes one original error and two warnings; all three added react-hooks/set-state-in-effect diagnostics remain."
+    },
+    {
+      "command": "tsc --noEmit --incremental false",
+      "exit": 0
+    },
+    {
+      "command": "npm run build",
+      "exit": 0,
+      "bundler": "Turbopack"
+    },
+    {
+      "command": "npm ls --all",
+      "exit": 0
+    },
+    {
+      "command": "npm audit --omit=dev",
+      "exit": 0,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "high": 0,
+        "critical": 0,
+        "total": 0
+      }
+    },
+    {
+      "command": "npm audit",
+      "exit": 1,
+      "vulnerabilities": {
+        "info": 0,
+        "low": 0,
+        "moderate": 16,
+        "high": 0,
+        "critical": 0,
+        "total": 16
+      }
+    },
+    {
+      "command": "production browser page/API smoke",
+      "exit": 0,
+      "note": "Five pages returned 200, two missing-input API requests returned 400; zero uncaught browser errors."
+    },
+    {
+      "command": "production Cesium browser smoke",
+      "exit": 0
+    },
+    {
+      "command": "webpack development Cesium browser smoke",
+      "exit": 1,
+      "observedStatus": 500,
+      "note": "Package export mismatch before asset-resolution test."
+    },
+    {
+      "command": "Node ESM import cesium",
+      "exit": 1,
+      "message": "The requested module '@cesium/engine' does not provide an export named 'ForEach'"
+    }
+  ],
+  "cesium": {
+    "productionBundle": [
+      {
+        "file": "2nxwomz-meuto.js",
+        "sha256": "9759d5eecb5a447c580d353c1fdcd42e929a77a21d46f03ba8a5d8c1ebd02bab",
+        "hasFixedBase": true,
+        "hasFreeBaseReference": false,
+        "snippet": "?e:(ew(y)||(y=document.createElement(\"a\")),y.href=e,y.href)}function xR(){if(ew(A))return A;if(!ew(\"https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/\"))throw new eE(\"Unable to determine Cesium base URL automatically, try defining a global variable c"
+      }
+    ],
+    "before": {
+      "stage": "before",
+      "mode": "actual Next production bundle; real installed Cesium 1.146 assets fulfilled locally; synthetic imagery/empty tileset; all other external requests blocked",
+      "browser": "156.0.4314.58",
+      "waitResult": "worker response timeout",
+      "canvases": 1,
+      "workers": [
+        {
+          "url": "blob",
+          "imports": [
+            "file:///ROOT/node_modules/@cesium/engine/Source/Core/Workers/createVerticesFromHeightmap.js"
+          ],
+          "baseUrls": [],
+          "messages": 0,
+          "errors": [
+            null
+          ]
+        },
+        {
+          "url": "blob",
+          "imports": [
+            "file:///ROOT/node_modules/@cesium/engine/Source/Core/Workers/transferTypedArrayTest.js"
+          ],
+          "baseUrls": [],
+          "messages": 0,
+          "errors": [
+            null
+          ]
+        }
+      ],
+      "servedCount": 2,
+      "servedPackagePaths": [
+        "Assets/Textures/NaturalEarthII/tilemapresource.xml"
+      ],
+      "failures": [
+        {
+          "url": "http://127.0.0.1:3102/ROOT/node_modules/@cesium/engine/Source/Core/Assets/Images/ion-credit.png",
+          "status": 404
+        }
+      ],
+      "errors": [
+        "aB"
+      ],
+      "blocked": [],
+      "consoleErrors": [
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/approximateTerrainHeights.json",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/bingAerial.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/bingAerial.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/bingAerialLabels.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/bingRoads.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/sentinel-2.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/blueMarble.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/earthAtNight.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/naturalEarthII.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/googleSatellite.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/googleSatelliteLabels.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/googleRoadmap.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/googleContour.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/azureAerial.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/azureRoads.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/ArcGisMapServiceWorldImagery.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/ArcGisMapServiceWorldHillshade.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/ArcGisMapServiceWorldOcean.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/openStreetMap.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/stamenWatercolor.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/stamenToner.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/stadiaAlidadeSmooth.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/ImageryProviders/stadiaAlidadeSmoothDark.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/TerrainProviders/Ellipsoid.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/Mouse.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/Touch.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/MouseLeft.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/MouseRight.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/MouseMiddle.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/TouchDrag.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/TouchZoom.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/TouchTilt.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/Images/NavigationHelp/TouchRotate.svg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/IAU2006_XYS/IAU2006_XYS_18.json",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Widgets/InfoBox/InfoBoxDescription.css",
+        "Failed to load resource: the server responded with a status of 404 (Not Found)",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/Textures/SkyBox/tycho2t3_80_px.jpg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/Textures/SkyBox/tycho2t3_80_mx.jpg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/Textures/SkyBox/tycho2t3_80_py.jpg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/Textures/SkyBox/tycho2t3_80_my.jpg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/Textures/SkyBox/tycho2t3_80_pz.jpg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/Textures/SkyBox/tycho2t3_80_mz.jpg",
+        "Not allowed to load local resource: file:///ROOT/node_modules/@cesium/engine/Source/Core/Assets/Textures/moonSmall.jpg",
+        "An error occurred while rendering.  Rendering has stopped.\n[object Object]\nundefined"
+      ]
+    },
+    "after": {
+      "stage": "after",
+      "mode": "actual Next production bundle; real installed Cesium 1.146 assets fulfilled locally; synthetic imagery/empty tileset; all other external requests blocked",
+      "browser": "156.0.4314.58",
+      "waitResult": "worker response received",
+      "canvases": 1,
+      "workers": [
+        {
+          "url": "blob",
+          "imports": [
+            "https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/Workers/createVerticesFromHeightmap.js"
+          ],
+          "baseUrls": [
+            "https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/",
+            "https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/"
+          ],
+          "messages": 2,
+          "errors": []
+        },
+        {
+          "url": "blob",
+          "imports": [
+            "https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/Workers/transferTypedArrayTest.js"
+          ],
+          "baseUrls": [],
+          "messages": 1,
+          "errors": []
+        }
+      ],
+      "servedCount": 52,
+      "servedPackagePaths": [
+        "Assets/approximateTerrainHeights.json",
+        "Widgets/Images/ImageryProviders/bingAerial.png",
+        "Widgets/Images/ImageryProviders/bingAerialLabels.png",
+        "Widgets/Images/ImageryProviders/bingRoads.png",
+        "Widgets/Images/ImageryProviders/sentinel-2.png",
+        "Widgets/Images/ImageryProviders/blueMarble.png",
+        "Widgets/Images/ImageryProviders/earthAtNight.png",
+        "Widgets/Images/ImageryProviders/naturalEarthII.png",
+        "Widgets/Images/ImageryProviders/googleSatellite.png",
+        "Widgets/Images/ImageryProviders/googleSatelliteLabels.png",
+        "Widgets/Images/ImageryProviders/googleRoadmap.png",
+        "Widgets/Images/ImageryProviders/googleContour.png",
+        "Widgets/Images/ImageryProviders/azureAerial.png",
+        "Widgets/Images/ImageryProviders/azureRoads.png",
+        "Widgets/Images/ImageryProviders/ArcGisMapServiceWorldImagery.png",
+        "Widgets/Images/ImageryProviders/ArcGisMapServiceWorldHillshade.png",
+        "Widgets/Images/ImageryProviders/ArcGisMapServiceWorldOcean.png",
+        "Widgets/Images/ImageryProviders/openStreetMap.png",
+        "Widgets/Images/ImageryProviders/stamenWatercolor.png",
+        "Widgets/Images/ImageryProviders/stamenToner.png",
+        "Widgets/Images/ImageryProviders/stadiaAlidadeSmooth.png",
+        "Widgets/Images/ImageryProviders/stadiaAlidadeSmoothDark.png",
+        "Widgets/Images/TerrainProviders/Ellipsoid.png",
+        "Widgets/Images/TerrainProviders/CesiumWorldTerrain.png",
+        "Widgets/Images/NavigationHelp/Mouse.svg",
+        "Widgets/Images/NavigationHelp/Touch.svg",
+        "Widgets/Images/NavigationHelp/MouseLeft.svg",
+        "Widgets/Images/NavigationHelp/MouseRight.svg",
+        "Widgets/Images/NavigationHelp/MouseMiddle.svg",
+        "Widgets/Images/NavigationHelp/TouchDrag.svg",
+        "Widgets/Images/NavigationHelp/TouchZoom.svg",
+        "Widgets/Images/NavigationHelp/TouchTilt.svg",
+        "Widgets/Images/NavigationHelp/TouchRotate.svg",
+        "Assets/IAU2006_XYS/IAU2006_XYS_18.json",
+        "Assets/Images/ion-credit.png",
+        "Widgets/InfoBox/InfoBoxDescription.css",
+        "Assets/Textures/NaturalEarthII/tilemapresource.xml",
+        "Workers/createVerticesFromHeightmap.js",
+        "Workers/chunk-MXXXHGW3.js",
+        "Workers/chunk-J6FR5PFB.js",
+        "Workers/chunk-GWE2HRAQ.js",
+        "Assets/Textures/SkyBox/tycho2t3_80_px.jpg",
+        "Assets/Textures/SkyBox/tycho2t3_80_mx.jpg",
+        "Assets/Textures/SkyBox/tycho2t3_80_py.jpg",
+        "Assets/Textures/SkyBox/tycho2t3_80_my.jpg",
+        "Assets/Textures/SkyBox/tycho2t3_80_pz.jpg",
+        "Assets/Textures/SkyBox/tycho2t3_80_mz.jpg",
+        "Assets/Textures/moonSmall.jpg",
+        "Workers/transferTypedArrayTest.js",
+        "Assets/Textures/NaturalEarthII/0/0/0.jpg",
+        "Assets/Textures/NaturalEarthII/0/1/0.jpg"
+      ],
+      "failures": [],
+      "errors": [],
+      "blocked": [],
+      "consoleErrors": []
+    },
+    "harness": "cesium-smoke.cjs",
+    "externalRequests": "Locally fulfilled installed assets or synthetic fixtures; all other external requests blocked.",
+    "webpackBlocker": {
+      "cesium": "1.146.0",
+      "engine": "26.5.0",
+      "widgets": "16.3.1",
+      "missingExports": [
+        "ForEach",
+        "addBuffer",
+        "findAccessorMinMax"
+      ],
+      "reproducedWithoutNextConfiguration": true,
+      "proposedParent": "1.147.0",
+      "proposalStatus": "NOT IMPLEMENTED / NOT VALIDATED; outside explicit 1.146.0 target. Requires source/release review, matching CDN version, audit and both bundler checks."
+    }
+  },
+  "minimatch": {
+    "advisory": "GHSA-g3hv-75wg-m249",
+    "cve": "CVE-2026-118764",
+    "severity": "moderate",
+    "affectedPackageCount": 16,
+    "resolvedVersions": [
+      "3.1.5",
+      "10.2.6"
+    ],
+    "patchedVersion": "11.0.1",
+    "compatibleParentFixAvailable": false,
+    "accepted": false
+  },
+  "humanGates": {
+    "realZoningTiles": "PENDING",
+    "realCesiumTilesAndHardware": "PENDING",
+    "nativePdfSaveAndPagination": "PENDING",
+    "productionTriggers": "UNKNOWN",
+    "publicReachability": "UNKNOWN",
+    "independentNewHeadReview": "PENDING"
+  },
+  "reviewInvalidation": "Previous exact-HEAD review does not cover changed config or new build artifacts. Dependency and app source unchanged; original residual findings remain blocking.",
+  "rawLogs": [
+    {
+      "name": "ci.txt",
+      "sha256": "1de254d4fb060b74ddb94264a4b6361a852c70aaf274e7ee47618bf988474ca9",
+      "bytes": 921
+    },
+    {
+      "name": "lint.txt",
+      "sha256": "848ee3ba34f656ac0e4fc753345dc897521c9c22df9625255a99b7fd23b92e6b",
+      "bytes": 46545
+    },
+    {
+      "name": "typecheck.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "name": "build.txt",
+      "sha256": "1230b3b246ad1b175aa71616c38e60fc645d7bc4cbbc6522df32c584586f0c9a",
+      "bytes": 1156
+    },
+    {
+      "name": "dependency-tree.json",
+      "sha256": "bdb08996d09ac31592fa7fefc30a3e1c6a7a05c0eaf0efea96a3e8257864823d",
+      "bytes": 179747
+    },
+    {
+      "name": "production-audit.json",
+      "sha256": "9b1bb13eefa1978739f4c5c0f71c99a956f625cf739e08fb45702ccdc4209a61",
+      "bytes": 366
+    },
+    {
+      "name": "full-audit.json",
+      "sha256": "8718be16daca4ad431b29909f13fc78e88ec418f739a16d771a147ceb20d86a7",
+      "bytes": 9686
+    },
+    {
+      "name": "minimatch-registry.jsonl",
+      "sha256": "d3c3b3645e935524668b612c17213ff32257735b686b157cad7b9896535fd8b3",
+      "bytes": 3656
+    },
+    {
+      "name": "cesium-before.json",
+      "sha256": "04fc7d0e40ddc06b41119943de2ebd20855db3f7caecec8cd2e9aca912ff30e7",
+      "bytes": 7713
+    },
+    {
+      "name": "cesium-after.json",
+      "sha256": "546d8fc44084cb5a099b9208915683c90de9019f95595714e9e4484c00dac391",
+      "bytes": 11648
+    },
+    {
+      "name": "production-bundle.json",
+      "sha256": "dd9870b06cf6c88a65f86be283a4eff1d42d0ddc08e646bf197112cf21faf9e1",
+      "bytes": 475
+    },
+    {
+      "name": "browser-smoke.txt",
+      "sha256": "7a4616830447fac5e4dba4c7167699e9a65b2e125cfc9a5682d99e9cf22994da",
+      "bytes": 2802
+    },
+    {
+      "name": "webpack-dev-server.txt",
+      "sha256": "42432f2dc61b97d115610d6834509fb11328726b4e04c5533b8dec7f3fc5842c",
+      "bytes": 749916
+    },
+    {
+      "name": "cesium-webpack-dev.txt",
+      "sha256": "44620387b7532c65c81dffe65336a3d19bc951647c0aa1125d22070f0f39f8ae",
+      "bytes": 326
+    },
+    {
+      "name": "cesium-esm-import.txt",
+      "sha256": "b697ec79eab1d7baa26b31c2c047ed180b780c0a7d42df5219df91b2aad0e4c4",
+      "bytes": 82
+    },
+    {
+      "name": "cesium-latest-registry.json",
+      "sha256": "9fe7203b46b4091ef12608bea5bb815fe086848894e997215cefd6afb04b9405",
+      "bytes": 216
+    }
+  ],
+  "reproductionHarnessValidation": {
+    "exit": 0,
+    "stage": "after",
+    "workers": [
+      {
+        "url": "blob",
+        "imports": [
+          "https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/Workers/createVerticesFromHeightmap.js"
+        ],
+        "baseUrls": [
+          "https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/",
+          "https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/"
+        ],
+        "messages": 2,
+        "errors": []
+      },
+      {
+        "url": "blob",
+        "imports": [
+          "https://cesium.com/downloads/cesiumjs/releases/1.146/Build/Cesium/Workers/transferTypedArrayTest.js"
+        ],
+        "baseUrls": [],
+        "messages": 1,
+        "errors": []
+      }
+    ],
+    "canvases": 1,
+    "servedCount": 52,
+    "failures": [],
+    "errors": [],
+    "blocked": []
+  }
+}

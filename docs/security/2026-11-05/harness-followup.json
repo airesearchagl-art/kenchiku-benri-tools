@@ -1,0 +1,129 @@
+{
+  "date": "2026-11-05",
+  "role": "implementation, not independent review",
+  "baselineHead": "6a69831af45856e986af0d5d28988eb47c208abb",
+  "authorization": "Previously authorized limited implementation/verification corrections and normal push to the existing PR branch; the current delegation limits this work to the regression harness, its tests and evidence.",
+  "sources": [
+    {
+      "file": "docs/security/2026-11-05/state-regression.mjs",
+      "sha256Utf8Lf": "bdfc330897c9280287135da4b48930d2355931905aa9e95407f6ef4951bdb227",
+      "priorSha256Utf8Lf": "a2bcde6a8be3922e6bf114d67cfe95340bbc21cb060719fa4f9a4501a676c7d2"
+    },
+    {
+      "file": "docs/security/2026-11-05/state-regression-safety.mjs",
+      "sha256Utf8Lf": "b082b70a5179716b20f0be2b079a47fb7fe7b5f34ad6cd25bca80fe418cebb62"
+    },
+    {
+      "file": "docs/security/2026-11-05/state-regression-safety.test.mjs",
+      "sha256Utf8Lf": "b666e11eb6cd39f6cec8061773d898fb0cbf945fe0cc00dc3fd94e73cf26445a"
+    }
+  ],
+  "scope": {
+    "applicationCodeChanged": false,
+    "dependencyVersionsChanged": false,
+    "repositorySettingsChanged": false,
+    "priorEvidenceChanged": false
+  },
+  "urlContract": {
+    "schemes": [
+      "http:",
+      "https:"
+    ],
+    "canonicalHostnames": [
+      "localhost",
+      "127.0.0.1",
+      "[::1]"
+    ],
+    "normalizedToOrigin": true,
+    "credentialsAllowed": false,
+    "pathQueryFragmentAllowed": false,
+    "whitespaceControlsBackslashesAllowed": false,
+    "validationBeforePlaywrightImport": true
+  },
+  "networkContract": {
+    "observedFrom": "BrowserContext request events",
+    "blockedFrom": "Route decisions that call abort",
+    "externalApiCallsMeaning": "Count of observed off-origin browser request attempts, including blocked attempts and non-API assets; not proof of server-side egress.",
+    "successRequirements": [
+      "At least one browser request observed",
+      "blocked requests must be empty",
+      "off-origin observed requests must be zero"
+    ],
+    "serviceWorkers": "blocked only in the isolated test context"
+  },
+  "unitTests": {
+    "command": "node --test --test-reporter=tap docs/security/2026-11-05/state-regression-safety.test.mjs",
+    "exit": 0,
+    "tests": 58,
+    "pass": 58,
+    "fail": 0,
+    "networkAccess": false,
+    "negativeCases": "Synthetic URLs and event/route observations; subprocess preflight confirms rejection before Playwright import/browser launch."
+  },
+  "lint": {
+    "exit": 0,
+    "files": [
+      {
+        "file": "docs/security/2026-11-05/state-regression-safety.mjs",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "file": "docs/security/2026-11-05/state-regression-safety.test.mjs",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "file": "docs/security/2026-11-05/state-regression.mjs",
+        "errors": 0,
+        "warnings": 0
+      }
+    ]
+  },
+  "currentBrowserRun": {
+    "exit": 0,
+    "node": "24.22.1",
+    "npm": "11.19.1",
+    "appSourceHead": "6a69831af45856e986af0d5d28988eb47c208abb",
+    "buildId": "YyoMc3WDKXz5UoQdrY36l",
+    "requestedBase": "http://127.0.0.1:3105/",
+    "normalizedBase": "http://127.0.0.1:3105",
+    "checkpoints": 41,
+    "observedRequestCount": 120,
+    "externalApiCalls": 0,
+    "blocked": [],
+    "errors": [],
+    "historicalBeforeAfterComparisonRun": false,
+    "data": "Synthetic inputs and invalid synthetic storage strings only"
+  },
+  "historicalEvidence": {
+    "file": "docs/security/2026-11-05/state-followup.json",
+    "sha256Utf8Lf": "5a6ffceb6c918ad5e5eabbbbf4aced34c254a370687f7593e5a9295ff80acb52",
+    "preservedByteContentAfterLfNormalization": true,
+    "meaning": "The earlier 41-checkpoint before/after comparison remains evidence from its original run. This new run validates the hardened harness against the unchanged app, and does not repeat that old before/after comparison."
+  },
+  "notRun": [
+    "application build/typecheck/full suite: application unchanged, existing build reused",
+    "dependency install/audits: dependencies unchanged",
+    "authenticated Preview, real API/credential/tile/device tests, production operations"
+  ],
+  "reviewBoundary": "The reported independent review of application state changes at the baseline is retained. New harness/helper/tests require their own delta review; the author did not perform independent review.",
+  "rawEvidence": [
+    {
+      "name": "unit-tests.tap",
+      "sha256": "d1bffe25923706dd93a7b128891d8595da6cdc57046411bebe3c0c9ed7b65c81"
+    },
+    {
+      "name": "lint.json",
+      "sha256": "cd96ed8b09fd34f0a097d38905961b585861bf7325baad3c3bdfe864e60063a4"
+    },
+    {
+      "name": "state-current.json",
+      "sha256": "43c30365fb7374837b4a1e477c97a7295d5e99636d5af28f72be3cfd2ef85321"
+    },
+    {
+      "name": "state-current.txt",
+      "sha256": "bc13fe70ecaa4283cc26cf0ced9477d69a2e866e4fe205d9187704f0b40e2bb9"
+    }
+  ]
+}

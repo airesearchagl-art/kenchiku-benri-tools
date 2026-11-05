@@ -1,0 +1,446 @@
+{
+  "date": "2026-11-05",
+  "implementationOnly": true,
+  "baselineHead": "605edddabe8227b12c73db3f046f9c1987c4ec51",
+  "authorization": "Continue the existing PR/branch with behavior-preserving corrections to the three new lint diagnostics. Earlier delegation authorized normal commit/push. No new dependency versions, configuration changes, merge, production actions or risk acceptance.",
+  "environment": {
+    "node": "24.22.1",
+    "npm": "11.19.1",
+    "browser": "isolated Edge",
+    "externalApiRequests": 0,
+    "realCredentials": false,
+    "data": "synthetic inputs and synthetic localStorage strings only"
+  },
+  "sources": [
+    {
+      "file": "src/app/tools/handrail-strength/page.tsx",
+      "unchangedFromMainBeforeFix": true,
+      "baselineGitSourceSha256": "ec598bb5cd800eb8f3c177d0f15482dc85ef363f1f85ca305f1be4986c911c37",
+      "currentSourceLfSha256": "cf3e766cf35404d9c11ec9971e0049883adde35847e9de6d351b875d77f44f88"
+    },
+    {
+      "file": "src/app/tools/zoning-info/page.tsx",
+      "unchangedFromMainBeforeFix": true,
+      "baselineGitSourceSha256": "ead76f555c225f3f57eb2306dc6839aee433b611478448120fb8b4036cb9eccd",
+      "currentSourceLfSha256": "b5f79965860ec0c5ff26df569da393483423387b4fef6b792592953aa62b4e60"
+    }
+  ],
+  "lint": {
+    "before": [
+      {
+        "file": "src/app/tools/handrail-strength/page.tsx",
+        "errors": 2,
+        "warnings": 0,
+        "messages": [
+          {
+            "rule": "react-hooks/set-state-in-effect",
+            "line": 195,
+            "severity": 2,
+            "message": "Error: Calling setState synchronously within an effect can trigger cascading renders"
+          },
+          {
+            "rule": "react-hooks/set-state-in-effect",
+            "line": 208,
+            "severity": 2,
+            "message": "Error: Calling setState synchronously within an effect can trigger cascading renders"
+          }
+        ]
+      },
+      {
+        "file": "src/app/tools/zoning-info/page.tsx",
+        "errors": 5,
+        "warnings": 0,
+        "messages": [
+          {
+            "rule": "@typescript-eslint/no-explicit-any",
+            "line": 20,
+            "severity": 2,
+            "message": "Unexpected any. Specify a different type."
+          },
+          {
+            "rule": "react-hooks/set-state-in-effect",
+            "line": 28,
+            "severity": 2,
+            "message": "Error: Calling setState synchronously within an effect can trigger cascading renders"
+          },
+          {
+            "rule": "@typescript-eslint/no-explicit-any",
+            "line": 65,
+            "severity": 2,
+            "message": "Unexpected any. Specify a different type."
+          },
+          {
+            "rule": "@typescript-eslint/no-explicit-any",
+            "line": 121,
+            "severity": 2,
+            "message": "Unexpected any. Specify a different type."
+          },
+          {
+            "rule": "@typescript-eslint/no-explicit-any",
+            "line": 129,
+            "severity": 2,
+            "message": "Unexpected any. Specify a different type."
+          }
+        ]
+      }
+    ],
+    "after": [
+      {
+        "file": "src/app/tools/handrail-strength/page.tsx",
+        "errors": 0,
+        "warnings": 0,
+        "messages": []
+      },
+      {
+        "file": "src/app/tools/zoning-info/page.tsx",
+        "errors": 4,
+        "warnings": 0,
+        "messages": [
+          {
+            "rule": "@typescript-eslint/no-explicit-any",
+            "line": 34,
+            "severity": 2,
+            "message": "Unexpected any. Specify a different type."
+          },
+          {
+            "rule": "@typescript-eslint/no-explicit-any",
+            "line": 70,
+            "severity": 2,
+            "message": "Unexpected any. Specify a different type."
+          },
+          {
+            "rule": "@typescript-eslint/no-explicit-any",
+            "line": 126,
+            "severity": 2,
+            "message": "Unexpected any. Specify a different type."
+          },
+          {
+            "rule": "@typescript-eslint/no-explicit-any",
+            "line": 134,
+            "severity": 2,
+            "message": "Unexpected any. Specify a different type."
+          }
+        ]
+      }
+    ],
+    "newDiagnosticsBefore": 3,
+    "newDiagnosticsAfter": 0,
+    "unrelatedDiagnosticsUnchanged": true,
+    "afterExit": 1,
+    "note": "Four existing no-explicit-any errors remain in zoning-info. Full repository lint was not repeated; these are scoped results."
+  },
+  "typecheck": {
+    "command": "tsc --noEmit --incremental false",
+    "exit": 0
+  },
+  "build": {
+    "command": "npm run build",
+    "exit": 0,
+    "bundler": "Turbopack"
+  },
+  "regression": {
+    "checkpoints": 41,
+    "beforeAfterDeepEqual": true,
+    "beforeSha256": "c8f1fe0b6837d09cfc2cceaff71e7877f4ac66294c180563d0ff996f1ff935d2",
+    "afterSha256": "c8f1fe0b6837d09cfc2cceaff71e7877f4ac66294c180563d0ff996f1ff935d2",
+    "errors": [],
+    "blocked": [],
+    "observations": [
+      {
+        "name": "glass-initial",
+        "sha256": "1e23a049ceb8c17310e12a74534db319a9691880e9daa6b87151a1a5364be9b3"
+      },
+      {
+        "name": "glass-manual-input",
+        "sha256": "16ca82e4e3eac6dc1b7b1b7a6265967627296155868ab57304d5aebd0a13c07e"
+      },
+      {
+        "name": "glass-first-save",
+        "sha256": "60b2e1eff1115433d302e4d88a05a6bc39deab945a28a2b0f651dc5c3547d243"
+      },
+      {
+        "name": "unrelated-column-edit-keeps-glass",
+        "sha256": "0c65318f0219c5eee845a8228d28f9fa847f099a4cd254ce8fb318cdf72312cc"
+      },
+      {
+        "name": "changed-column-load-updates-glass",
+        "sha256": "376032d4bc62f2931d910f72a5a1ddbf491f8e6f676c5ee90e13cca0a9f7863c"
+      },
+      {
+        "name": "handrail-edit-keeps-glass",
+        "sha256": "0f1b3261123f824401c2c580c567614e02ad0a44f57c9d203dd69278b4dbd865"
+      },
+      {
+        "name": "support-two_edge",
+        "sha256": "68de7e7a8c516f1de32120a8e4ac3656fcc05a0262c38ffc133352082e2064bc"
+      },
+      {
+        "name": "support-four_edge",
+        "sha256": "5f4d070200567f4aee1466b16595fd896d133039a9aa5c8dbf386e34d2dbbb94"
+      },
+      {
+        "name": "glass-second-save",
+        "sha256": "74990a47f8ec9cefdd34b61b58a90f63cd58739627bad2aaa4fd396abd95269b"
+      },
+      {
+        "name": "edited-after-save",
+        "sha256": "67886818152aa3f14828437d90c3be0f0b2b9ec1ca421faf9e4558cccca60417"
+      },
+      {
+        "name": "same-column-load-keeps-manual-override",
+        "sha256": "8a18c2b172e5816ee8a107eff772d9334938386b51217583fd01d1f23d43bdaf"
+      },
+      {
+        "name": "storage-absent-initial",
+        "sha256": "aebbf6d2766d44584e261d9c7dc4b633817bd93e75eb87d59ee14eca00fe1c38"
+      },
+      {
+        "name": "storage-absent-external-storage-does-not-replace-initial-value",
+        "sha256": "b1248c6721d6fc3b2b88cc6f429182bbc931f6321ba88d913105987ece8af379"
+      },
+      {
+        "name": "storage-absent-empty-draft-stays-empty",
+        "sha256": "c5d460f61f8e5a899dd53c01c468880541cad4a674dbcd1c447b78c2ff624165"
+      },
+      {
+        "name": "storage-absent-draft",
+        "sha256": "4f1ef1e6baf20d924daca88a17c2301decc5278dc430c263de783095d10db8be"
+      },
+      {
+        "name": "storage-absent-external-storage-does-not-overwrite-draft",
+        "sha256": "6a7ac5cd04082d7ed18ee5df416ee698d76a463afde82751a82bb9b53cced6b8"
+      },
+      {
+        "name": "storage-absent-saved",
+        "sha256": "29ff57bab0d265c2a4c3a12a45a395e719e72c887debd2adee00d61ddc3e7a1b"
+      },
+      {
+        "name": "storage-absent-unsaved-edit",
+        "sha256": "b9e92aad7acc415d0a28abf902abd00656076e0dd61254fcb3e7f76f0390bee3"
+      },
+      {
+        "name": "storage-absent-reload-restores-saved-only",
+        "sha256": "c6fdfee33ab49b5dce915f54d94e02b181d747d34a9ed4aa25090a5ea634e122"
+      },
+      {
+        "name": "storage-absent-cleared",
+        "sha256": "b2836248cbb689e9dcb9b8d184c68b5fff2dd339454e5def26bd61d2ef99c116"
+      },
+      {
+        "name": "storage-absent-clear-survives-rerender",
+        "sha256": "2c7a6a90b82fd9a8917e6c278e88da83320cb2308e4e4e32cdd47649d532a77c"
+      },
+      {
+        "name": "storage-empty-initial",
+        "sha256": "c5f0d1e0cd6e3127b48742d9d7f56698d58dfeeac2d994e0768902ab213df9ae"
+      },
+      {
+        "name": "storage-empty-external-storage-does-not-replace-initial-value",
+        "sha256": "969fc9f1fd153829fc81711378ea2392c0de151860b031ee58c8394a86453efc"
+      },
+      {
+        "name": "storage-empty-empty-draft-stays-empty",
+        "sha256": "443b8fd4c785e36aace3a44150682b67d6a53ef04bf5d64c233e3c9bb08c9741"
+      },
+      {
+        "name": "storage-empty-draft",
+        "sha256": "17beeccd916990eee7e7bc786758586c9a563ce9ba98f8ba4538a667262b9e18"
+      },
+      {
+        "name": "storage-empty-external-storage-does-not-overwrite-draft",
+        "sha256": "dd73c43df44a37cae3abbcd0b5c57741f03ce9bdc63c47a1fa2e9faefd7b83c8"
+      },
+      {
+        "name": "storage-empty-saved",
+        "sha256": "473ae8f00cf12990ec962e3893e74089e50b9f8217eddbb71867ad3446bb93f0"
+      },
+      {
+        "name": "storage-empty-unsaved-edit",
+        "sha256": "4b1b7ea4dfd5aac4ed645e52e3d56191ec9f0f0a86c6538b0b1398e0825c745d"
+      },
+      {
+        "name": "storage-empty-reload-restores-saved-only",
+        "sha256": "e91372bd0534785ab41ca44718edc4a5d09c39edd0d75a1f26dd71a39b1e8f16"
+      },
+      {
+        "name": "storage-empty-cleared",
+        "sha256": "519507ecdbd6f37d044c65e12e7624b20ae2c5257f1fdc2f63dfe375a3d71180"
+      },
+      {
+        "name": "storage-empty-clear-survives-rerender",
+        "sha256": "60822fa36cb0c5f48d8b7ac16b7dc1ba30a4894b181aeccf405b76a20a4122c5"
+      },
+      {
+        "name": "storage-present-initial",
+        "sha256": "b5067a6fdfea609c7b68af8610135298be662ae7ca47848fba13e7563b107d07"
+      },
+      {
+        "name": "storage-present-external-storage-does-not-replace-initial-value",
+        "sha256": "04b47ad8f3301044098a68556749b69ac2db97200ff32a44dc110812e412ad35"
+      },
+      {
+        "name": "storage-present-empty-draft-stays-empty",
+        "sha256": "c8d184ecef8370e3e21ce1e4bf5b6453472c927178f13790a72f0eb73b2deb55"
+      },
+      {
+        "name": "storage-present-draft",
+        "sha256": "debab933f0cffe80a89c3fb91aaaddc940e1a5d0be9704f430732141bdd9e5e9"
+      },
+      {
+        "name": "storage-present-external-storage-does-not-overwrite-draft",
+        "sha256": "9a1a667a62ed785f8d4d93b2449ebe9ebc6200eb06417f0138328e0c9d5a2125"
+      },
+      {
+        "name": "storage-present-saved",
+        "sha256": "1dc097ecea55a1efb086202a729f263462ff1c7f0f619770baa8d07df171ec3e"
+      },
+      {
+        "name": "storage-present-unsaved-edit",
+        "sha256": "7ed9f8a680c685ea4567d689254f769eb14bfe1cd54a13bd5a54bfa23983adff"
+      },
+      {
+        "name": "storage-present-reload-restores-saved-only",
+        "sha256": "833697c901864828d3193f7d0f5c6443380bcf840f693ce2146cfc640703bc93"
+      },
+      {
+        "name": "storage-present-cleared",
+        "sha256": "a2a2ca0ad8c1461990b2e71101cb5a2825cc449d2ce4164e2753c27b3bf19a16"
+      },
+      {
+        "name": "storage-present-clear-survives-rerender",
+        "sha256": "de9f4861c56a8940f43af5ebfe1fe1853b99c4f77962552a3d990748f3c7927a"
+      }
+    ],
+    "timing": "Compares settled user-visible state after the prior implementation's passive effects, not the number of render passes.",
+    "harnessCorrections": "Selectors were made unique, opaque about:blank was excluded from fixture seeding, and JSON undefined fields were normalized. The final existing before/after files were compared without rerunning browser actions."
+  },
+  "cesium": {
+    "dependencyVersionsUnchanged": true,
+    "exportDiagnostic": {
+      "missing": [
+        "ForEach",
+        "addBuffer",
+        "addDefaults",
+        "addExtensionsRequired",
+        "addExtensionsUsed",
+        "addPipelineExtras",
+        "addToArray",
+        "findAccessorMinMax",
+        "forEachTextureInMaterial",
+        "getAccessorByteStride",
+        "getComponentReader",
+        "moveTechniqueRenderStates",
+        "moveTechniquesToExtension",
+        "numberOfComponentsForType",
+        "parseGlb",
+        "readAccessorPacked",
+        "removeExtension",
+        "removeExtensionsRequired",
+        "removeExtensionsUsed",
+        "removePipelineExtras",
+        "removeUnusedElements",
+        "updateAccessorComponentTypes",
+        "updateVersion",
+        "usesExtension",
+        "_shaderspassClassification"
+      ],
+      "allMovedToGltf": false,
+      "resiumImportsCesium": true
+    },
+    "commonJsProbe": {
+      "context": "Isolated webpack web entry, then a second probe with Next 16.4.3's existing path-browserify fallback and mocked __dirname. No repository configuration changes.",
+      "errors": [],
+      "warnings": [
+        "Critical dependency: the request of a dependency is an expression"
+      ],
+      "execution": "Cannot find module '/Build/CesiumUnminified/index.cjs'",
+      "limitations": "A diagnostic of the package entry, not a full Next route replacement or live Cesium test."
+    },
+    "safeVersionPreservingFixConfirmed": false,
+    "pendingDecision": {
+      "cesium": "1.146.0 -> 1.147.0 candidate",
+      "assetBase": ".../releases/1.146/Build/Cesium/ -> .../releases/1.147/Build/Cesium/",
+      "lockfile": "Regenerate with normal npm install after authorization; no overrides.",
+      "validation": [
+        "official release/source compatibility",
+        "npm ci and dependency tree",
+        "production and full advisory audits",
+        "webpack development compilation",
+        "Turbopack production build",
+        "local/mock actual Cesium Worker and asset resolution in both bundlers"
+      ],
+      "status": "PENDING authorization; not implemented or validated"
+    }
+  },
+  "notRepeated": [
+    "npm ci/audits: dependency manifest and lockfile unchanged; prior audit results are dated 2026-11-03, not a new November 5 audit",
+    "unrelated page/API/PDF suites and real API/tiles/production tests"
+  ],
+  "stillPending": [
+    "Cesium dependency/asset-version decision",
+    "existing lint debt",
+    "development minimatch findings (no waiver)",
+    "Human real tiles/device/PDF checks",
+    "Production trigger/public reachability verification",
+    "independent review at new remote HEAD"
+  ],
+  "rawEvidence": [
+    {
+      "name": "lint-before.json",
+      "sha256": "f634d167a207e9ab3716c3eca451e766016c3ed4ef33953f2fffac14df30235f"
+    },
+    {
+      "name": "lint-after.json",
+      "sha256": "b505fb49ba947d908ef00cc482a2d6b58bb2757c41c135559b5641e57d75d3e2"
+    },
+    {
+      "name": "typecheck.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "build.txt",
+      "sha256": "279e636296e664e01e3b45fb76727a72126807eb5c39156eb7a8f39eefc9ca5b"
+    },
+    {
+      "name": "state-before.json",
+      "sha256": "c8f1fe0b6837d09cfc2cceaff71e7877f4ac66294c180563d0ff996f1ff935d2"
+    },
+    {
+      "name": "state-after.json",
+      "sha256": "c8f1fe0b6837d09cfc2cceaff71e7877f4ac66294c180563d0ff996f1ff935d2"
+    },
+    {
+      "name": "state-comparison.json",
+      "sha256": "195b9f286d084dbfe92fc5e88d935046be4b741ab4ced629f771fa2ede9137ed"
+    },
+    {
+      "name": "cesium-export-diagnostic.json",
+      "sha256": "fc5fccc6f37c2d6f59db8123cf724e8b1aa54cbd1ff0847db37859e5b15cde0b"
+    },
+    {
+      "name": "cesium-next-path-diagnostic.txt",
+      "sha256": "0a115b85bcaa60d1df903c49bceb53e1817acf14149a85aa1be78e9b7ec8615c"
+    }
+  ],
+  "finalScopedLint": {
+    "exit": 1,
+    "files": [
+      {
+        "file": "docs/security/2026-11-05/state-regression.mjs",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/tools/handrail-strength/page.tsx",
+        "errors": 0,
+        "warnings": 0
+      },
+      {
+        "file": "src/app/tools/zoning-info/page.tsx",
+        "errors": 4,
+        "warnings": 0
+      }
+    ],
+    "newHookDiagnostics": 0
+  }
+}
