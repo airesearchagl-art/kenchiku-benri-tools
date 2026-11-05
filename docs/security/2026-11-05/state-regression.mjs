@@ -2,21 +2,22 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-const modulePath = process.env.PLAYWRIGHT_MODULE_PATH;
-const { chromium } = await import(modulePath ? pathToFileURL(path.join(modulePath, 'index.mjs')).href : 'playwright');
-const base = process.env.TEST_BASE_URL || 'http://127.0.0.1:3105';
+import { validateLoopbackBaseUrl, createRequestGuard, assertLocalRequestsOnly } from './state-regression-safety.mjs';
+const base = validateLoopbackBaseUrl(process.env.TEST_BASE_URL ?? 'http://127.0.0.1:3105');
 const output = process.env.STATE_TEST_OUTPUT;
 assert(output, 'Set STATE_TEST_OUTPUT');
+const modulePath = process.env.PLAYWRIGHT_MODULE_PATH;
+const { chromium } = await import(modulePath ? pathToFileURL(path.join(modulePath, 'index.mjs')).href : 'playwright');
 
 (async () => {
   const browser = await chromium.launch({ channel: 'msedge', headless: true });
-  const snapshots = [], errors = [], blocked = [];
+  const snapshots = [], errors = [];
+  const guard = createRequestGuard(base);
   async function context() {
-    const ctx = await browser.newContext();
+    const ctx = await browser.newContext({ serviceWorkers: 'block' });
+    ctx.on('request', request => guard.observe(request.url()));
     await ctx.route('**/*', route => {
-      const url = new URL(route.request().url());
-      if (url.origin === base) return route.continue();
-      blocked.push(url.origin + url.pathname);
+      if (guard.route(route.request().url())) return route.continue();
       return route.abort();
     });
     ctx.on('page', page => page.on('pageerror', e => errors.push(e.message)));
@@ -164,13 +165,15 @@ assert(output, 'Set STATE_TEST_OUTPUT');
       assert.equal((await captureKey('clear-survives-rerender')).value, '');
       await ctx.close();
     }
-    const evidence = { snapshots, errors, blocked, syntheticOnly: true, externalApiCalls: 0 };
+    const network = guard.evidence();
+    const evidence = { snapshots, errors, ...network, syntheticOnly: true };
     fs.writeFileSync(output, JSON.stringify(evidence, null, 2) + '\n');
     assert.deepEqual(errors, []);
+    assertLocalRequestsOnly(network);
     if (process.env.STATE_TEST_BASELINE) {
       const before = JSON.parse(fs.readFileSync(process.env.STATE_TEST_BASELINE));
       assert.deepEqual(JSON.parse(JSON.stringify(snapshots)), before.snapshots, 'Before/after observable state and calculated/saved output must match');
     }
-    console.log(JSON.stringify({ pass: true, snapshots: snapshots.length, beforeAfterEqual: Boolean(process.env.STATE_TEST_BASELINE), errors, blocked }));
+    console.log(JSON.stringify({ pass: true, snapshots: snapshots.length, beforeAfterEqual: Boolean(process.env.STATE_TEST_BASELINE), errors, ...network }));
   } finally { await browser.close(); }
 })().catch(error => { console.error(error); process.exitCode = 1; });
