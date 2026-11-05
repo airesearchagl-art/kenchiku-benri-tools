@@ -3,6 +3,8 @@
 Date: 2026-11-03. Baseline: `a175e36cae0d23bb402ff868de4742423c8e385a` (latest `main` when work began).
 Implementation and local validation only; this document is not an independent review or risk acceptance.
 
+**2026-11-05 update:** the three new `react-hooks/set-state-in-effect` diagnostics are now resolved by behavior-preserving changes to the handrail and zoning pages. All 41 synthetic before/after checkpoints match, including calculated results, saved report snapshots and storage restoration/edit/save/clear behavior. Scoped lint leaves four pre-existing `no-explicit-any` errors; typecheck and the new production build pass. Dependency versions and configuration were not changed. The checks below dated November 3 are historical; see the [current scoped follow-up](STATE_SYNC_FOLLOWUP_2026-11-05.md) and [evidence](security/2026-11-05/state-followup.json). The Cesium development issue and other merge gates remain pending.
+
 Follow-up to the independent review of `aa75ccf606a81871549482b78b748cef0bbd26ad`: **BLOCKED remains**. The Cesium production asset-path defect is corrected below; lint, development minimatch, a newly reproduced webpack/Cesium export incompatibility, Human checks and production-trigger verification remain open. See [follow-up evidence](security/2026-11-03/review-followup.json).
 
 ## Changes and compatibility
@@ -60,7 +62,7 @@ Examples resolved by this update include:
 
 The lockfile contains minimatch 3.1.5 and 10.2.6. ESLint 9.39.5, @eslint/config-array 0.21.2 and @eslint/eslintrc 3.3.7 require `^3.1.5`; eslint-plugin-import/jsx-a11y/react retain 3.x ranges; @typescript-eslint/typescript-estree 8.72.1 requires `^10.2.2`. Patched minimatch 11.0.1 is outside those ranges. npm reports the finding through 16 development packages. Its suggested downgrade to ESLint 4 / eslint-config-next 12 was not applied. Compatible upstream fixes or an explicitly reviewed separate migration are required. There are no production findings and no remaining Critical/High findings in the full audit.
 
-## Validation
+## Validation (2026-11-03, historical)
 
 Runtime: official Windows x64 Node 24.22.1, npm 11.19.1, isolated workspace install. Node archive SHA-256: `d2046d28c2c3dcd211ac5145c0bf30e2047ef9dfb306693c8c6e2eccd8b95fa5`, matched to the official SHASUMS256.txt. Global Node and npm were not changed.
 

@@ -75,7 +75,6 @@ export default function HandrailStrengthPage() {
         height: 1100,
         designLoad: 1470,
     });
-    const [glassResult, setGlassResult] = useState<GlassStrengthResult | null>(null);
     const [savedGlassData, setSavedGlassData] = useState<GlassInputData | null>(null);
     const [savedGlassResult, setSavedGlassResult] = useState<GlassStrengthResult | null>(null);
 
@@ -89,6 +88,9 @@ export default function HandrailStrengthPage() {
     const handleInputChange = (newData: HandrailInputData) => {
         if (activeTab === 'column') {
             setColumnInput(newData);
+            if (!Object.is(newData.horizontalLoad, columnInput.horizontalLoad)) {
+                setGlassData(prev => ({ ...prev, designLoad: newData.horizontalLoad }));
+            }
         } else if (activeTab === 'handrail') {
             setHandrailInput(newData);
         }
@@ -188,27 +190,12 @@ export default function HandrailStrengthPage() {
         } catch (e) { console.error(e); return null; }
     }, [handrailSectionProps, handrailInput]);
 
-
-    // 水平荷重の同期 (支柱設定 -> ガラス設定)
-    // 支柱の荷重が変わったらガラスのデフォルトも変える
-    React.useEffect(() => {
-        setGlassData(prev => ({
-            ...prev,
-            designLoad: columnInput.horizontalLoad
-        }));
-    }, [columnInput.horizontalLoad]);
-
-    // ガラス強度計算
-    const calculatedGlassResult = useMemo(() => {
+    // Derive the current result; saved report snapshots remain separate.
+    const glassResult = useMemo(() => {
         return calculateGlassStrength(glassData);
     }, [glassData]);
 
-    // ガラス結果の更新 (表示用)
-    React.useEffect(() => {
-        setGlassResult(calculatedGlassResult);
-    }, [calculatedGlassResult]);
-
-    // 保存関数更新
+    // Save the current inputs and results as a report snapshot.
     const saveCurrentResult = () => {
         if (activeTab === 'column') {
             setSavedColumnData(columnInput);
@@ -220,7 +207,7 @@ export default function HandrailStrengthPage() {
             setSavedHandrailResult(handrailResult);
         } else {
             setSavedGlassData(glassData);
-            setSavedGlassResult(calculatedGlassResult);
+            setSavedGlassResult(glassResult);
         }
     };
 
